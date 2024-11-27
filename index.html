@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble Timeline Visualization</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <h1>Enhanced Bubble Timeline</h1>
+  <div id="visualization"></div>
+  
+  <script>
+    const spec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "description": "Enhanced bubble timeline for patterns across different months and years.",
+      "data": {
+        "values": [
+          { "Year": 2023, "Month": "March", "Pattern": "بسيط", "Value": 5059 },
+          { "Year": 2023, "Month": "March", "Pattern": "بليغ", "Value": 485 },
+          { "Year": 2023, "Month": "March", "Pattern": "مركبات مخالفة", "Value": 131 },
+          { "Year": 2023, "Month": "March", "Pattern": "عبور شخص أو عدة أشخاص من مكان غير مخصص لعبور المشا", "Value": 10 },
+          { "Year": 2023, "Month": "March", "Pattern": "حريق مركبة اثناء سيرها", "Value": 4 },
+          { "Year": 2023, "Month": "April", "Pattern": "بسيط", "Value": 5790 },
+          { "Year": 2023, "Month": "April", "Pattern": "بليغ", "Value": 616 },
+          { "Year": 2023, "Month": "April", "Pattern": "مركبات مخالفة", "Value": 246 },
+          { "Year": 2023, "Month": "April", "Pattern": "عبور شخص أو عدة أشخاص من مكان غير مخصص لعبور المشا", "Value": 14 },
+          { "Year": 2023, "Month": "April", "Pattern": "حريق مركبة اثناء سيرها", "Value": 9 },
+          { "Year": 2024, "Month": "March", "Pattern": "بسيط", "Value": 6238 },
+          { "Year": 2024, "Month": "March", "Pattern": "بليغ", "Value": 601 },
+          { "Year": 2024, "Month": "March", "Pattern": "مركبات مخالفة", "Value": 309 },
+          { "Year": 2024, "Month": "March", "Pattern": "عبور شخص أو عدة أشخاص من مكان غير مخصص لعبور المشا", "Value": 32 },
+          { "Year": 2024, "Month": "March", "Pattern": "حريق مركبة اثناء سيرها", "Value": 10 },
+          { "Year": 2024, "Month": "April", "Pattern": "بسيط", "Value": 3897 },
+          { "Year": 2024, "Month": "April", "Pattern": "بليغ", "Value": 343 },
+          { "Year": 2024, "Month": "April", "Pattern": "مركبات مخالفة", "Value": 192 },
+          { "Year": 2024, "Month": "April", "Pattern": "عبور شخص أو عدة أشخاص من مكان غير مخصص لعبور المشا", "Value": 22 },
+          { "Year": 2024, "Month": "April", "Pattern": "حريق مركبة اثناء سيرها", "Value": 9 },
+          { "Year": 2024, "Month": "June", "Pattern": "بسيط", "Value": 5224 },
+          { "Year": 2024, "Month": "June", "Pattern": "بليغ", "Value": 409 },
+          { "Year": 2024, "Month": "June", "Pattern": "مركبات مخالفة", "Value": 323 },
+          { "Year": 2024, "Month": "June", "Pattern": "عبور شخص أو عدة أشخاص من مكان غير مخصص لعبور المشا", "Value": 18 },
+          { "Year": 2024, "Month": "June", "Pattern": "حريق مركبة اثناء سيرها", "Value": 4 },
+          { "Year": 2024, "Month": "July", "Pattern": "بسيط", "Value": 7753 },
+          { "Year": 2024, "Month": "July", "Pattern": "بليغ", "Value": 625 },
+          { "Year": 2024, "Month": "July", "Pattern": "مركبات مخالفة", "Value": 515 },
+          { "Year": 2024, "Month": "July", "Pattern": "عبور شخص أو عدة أشخاص من مكان غير مخصص لعبور المشا", "Value": 31 },
+          { "Year": 2024, "Month": "July", "Pattern": "حريق مركبة اثناء سيرها", "Value": 9 },
+          { "Year": 2024, "Month": "August", "Pattern": "بسيط", "Value": 7938 },
+          { "Year": 2024, "Month": "August", "Pattern": "بليغ", "Value": 689 },
+          { "Year": 2024, "Month": "August", "Pattern": "مركبات مخالفة", "Value": 570 },
+          { "Year": 2024, "Month": "August", "Pattern": "عبور شخص أو عدة أشخاص من مكان غير مخصص لعبور المشا", "Value": 39 },
+          { "Year": 2024, "Month": "August", "Pattern": "حريق مركبة اثناء سيرها", "Value": 5 },
+          { "Year": 2024, "Month": "September", "Pattern": "بسيط", "Value": 560 },
+          { "Year": 2024, "Month": "September", "Pattern": "بليغ", "Value": 46 },
+          { "Year": 2024, "Month": "September", "Pattern": "مركبات مخالفة", "Value": 39 },
+          { "Year": 2024, "Month": "September", "Pattern": "عبور شخص أو عدة أشخاص من مكان غير مخصص لعبور المشا", "Value": 3 },
+          { "Year": 2024, "Month": "September", "Pattern": "حريق مركبة اثناء سيرها", "Value": 1 }
+        ]
+      },
+      "mark": { "type": "circle", "tooltip": true },
+      "encoding": {
+        "x": {
+          "field": "Month",
+          "type": "ordinal",
+          "title": "Month",
+          "sort": [
+            "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+          ]
+        },
+        "y": { "field": "Year", "type": "ordinal", "title": "Year" },
+        "size": { "field": "Value", "type": "quantitative", "title": "Value", "scale": { "range": [10, 1000] } },
+        "color": { "field": "Pattern", "type": "nominal", "title": "Pattern", "legend": { "title": "Pattern Types" } },
+        "tooltip": [
+          { "field": "Year", "type": "ordinal", "title": "Year" },
+          { "field": "Month", "type": "ordinal", "title": "Month" },
+          { "field": "Pattern", "type": "nominal", "title": "Pattern" },
+          { "field": "Value", "type": "quantitative", "title": "Value" }
+        ]
+      },
+      "config": {
+        "view": { "width": 900, "height": 600 },
+        "axis": { "grid": true, "labelAngle": 0 }
+      }
+    };
+
+    vegaEmbed('#visualization', spec).catch(console.error);
+  </script>
+</body>
+</html>
